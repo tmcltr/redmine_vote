@@ -1,10 +1,10 @@
 # Provides a link to the issue age graph on the issue index page
 class IssuesVoteHook < Redmine::Hook::ViewListener
   render_on :view_issues_show_details_bottom, :inline => <<-END
-    <tr><td><b>
+    <div class="attribute"><div class="label">
 
 	  <% if authorize_for('issues', 'view_votes') || authorize_for('issues', 'view_voter') || (authorize_for('issues', 'vote') && !@issue.voted_by_user?) || authorize_for('issues', 'multiple_vote') %>
-		<%= l :label_votes %>:</b></td><td>
+		<%= l :label_votes %>:</div><div class="value">
   	<% end %>
 
 	  <% if authorize_for('issues', 'view_votes') %>
@@ -18,6 +18,6 @@ class IssuesVoteHook < Redmine::Hook::ViewListener
       <%= link_to("", { :controller => 'vote', :action => 'down', :id => @issue }, :class => 'icon icon-vote-down', :method => 'post') %>
     <% end %>
 
-    </td></tr>
+    </div></div>
 END
 end
